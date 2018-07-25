@@ -20,9 +20,19 @@ It's often easiest to write the sections as you go, because the details are easi
 
 ## 2. Diversity measures
 
+This can be measured using the R package [ape](https://www.rdocumentation.org/packages/ape/versions/5.1). There are other packages too. If you can't get something to work in the first package you try, google your question and see what other people suggest. 
 
+Packages need to be installed in R, and can them be called up from the library on your computer: 
+```
+## in R
+
+install.packages("package.name") # you only need to do this once. 
+
+library(package.name)
+
+```
 
 
 ## 3. Phylogenetic tree
 
-
+Here's a [vignette](http://www.phytools.org/eqg/Exercise_3.2/) to get you started. 
