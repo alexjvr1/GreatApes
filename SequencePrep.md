@@ -76,8 +76,32 @@ Once that's uploaded, you can copy the link (http:....) and paste it here in the
 ```
 
 
+## Fasta file names
+
+First we want to rename all the fasta sequences because the name is unwieldy and has at least one space character. 
+
+```
+## in linux
+
+cp DianSRX243537.txt test.txt  ## I'm copying the file just in case something goes wrong
+
+sed -i '.bak' 's/HWI-ST700660.*/ /g' test.txt   ## I'm using the sed function to replace a string of text. sed = stream editor. -i means inline editing. '.bak' is an exension sed adds to the edited file. substitute/text to replace/ new text/ globally file.name. To match a string after some text (in this case HWI... ) add the '.*'
 
 
+## in Powershell for Windows
+
+Copy-Item Abefasta.txt Abenames.txt  ## change the file names as you see fit
+
+cat Abenames.txt | % { $_ -replace "HWI-ST700660*","" } > newfile.txt 
+
+```
+
+Then we want to create a file with a list of names for all the sequences, and make sure that they're unique. We'll add this to the file in R, so that you can sort and delete the files as necessary. 
+
+```
+
+
+```
 
 
 
