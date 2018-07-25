@@ -101,7 +101,11 @@ Then we want to create a file with a list of names for all the sequences, and ma
 ```
 ##linux
 
-grep 
+grep ">" test.txt  | wc -l ## check that this is the expected number of lines
+
+grep ">" test.txt > abenames.txt  ## write these lines to a new file
+
+uniq -d abenames.txt  ## check that all the lines are unique. -d option prints all the duplicated lines, so no output means all unique. 
 
 ## Windows PowerShell
 
