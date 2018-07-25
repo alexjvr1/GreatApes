@@ -114,6 +114,9 @@ sls ">" newfile.txt -ca | select -exp line > abenames.txt  ##sls = select string
 ##check that this is correct
 
 gc abenames.txt | select -first 10 ##Get-Content, alias=gc
+
+Get-Content abenames.txt | Group-Object | Where-Object { $_.Count -gt 1 } | Select -ExpandProperty Name    ## this should write all the duplicated names. Make sure there aren't any!
+
 ```
 
 
