@@ -92,8 +92,7 @@ sed -i '.bak' 's/HWI-ST700660.*/ /g' test.txt   ## I'm using the sed function to
 
 Copy-Item Abefasta.txt Abefasta.backup.txt  ## change the file names as you see fit
 
-cat Abefasta.backup.txt | % { $_ -replace "HWI-ST700660*","" } > newfile.txt 
-
+> (Get-Content Abe.backup.txt) | ForEach-Object {$_ -replace "HWI-ST[1-9,_,:]*",""} | set-content newfile.txt
 ```
 
 Then we want to create a file with a list of names for all the sequences, and make sure that they're unique. We'll add this to the file in R, so that you can sort and delete the files as necessary. 
@@ -118,6 +117,7 @@ gc abenames.txt | select -first 10 ##Get-Content, alias=gc
 Get-Content abenames.txt | Group-Object | Where-Object { $_.Count -gt 1 } | Select -ExpandProperty Name    ## this should write all the duplicated names. Make sure there aren't any!
 
 ```
+
 
 
 
