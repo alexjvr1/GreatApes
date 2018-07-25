@@ -90,17 +90,26 @@ sed -i '.bak' 's/HWI-ST700660.*/ /g' test.txt   ## I'm using the sed function to
 
 ## in Powershell for Windows
 
-Copy-Item Abefasta.txt Abenames.txt  ## change the file names as you see fit
+Copy-Item Abefasta.txt Abefasta.backup.txt  ## change the file names as you see fit
 
-cat Abenames.txt | % { $_ -replace "HWI-ST700660*","" } > newfile.txt 
+cat Abefasta.backup.txt | % { $_ -replace "HWI-ST700660*","" } > newfile.txt 
 
 ```
 
 Then we want to create a file with a list of names for all the sequences, and make sure that they're unique. We'll add this to the file in R, so that you can sort and delete the files as necessary. 
 
 ```
+##linux
 
+grep 
 
+## Windows PowerShell
+
+sls ">" newfile.txt -ca | select -exp line > abenames.txt  ##sls = select string
+
+##check that this is correct
+
+gc abenames.txt | select -first 10 ##Get-Content, alias=gc
 ```
 
 
