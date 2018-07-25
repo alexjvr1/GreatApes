@@ -31,7 +31,12 @@ The first thing we need to figure out is where we're making cut-offs for differe
 Look at the distribution of start and end points for all the data. 
 
 
+```
+R
 
+hist(sort(Dian.data$StartQuery), breaks=20)
+
+```
 
 
 
