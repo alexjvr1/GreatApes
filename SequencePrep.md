@@ -50,7 +50,7 @@ summary(Dian.data1$alignmentLength) ## Check that the function has worked
 hist(Dian.data1$StartQuery, breaks=20)  # hist is the function to draw a histogram. Breaks is a way of binning the data. The more breaks, the smaller the bins. Call the column you want to plot by referring to the data and then the specifying the column ($). 
 
 # to save any graphs or tables to pdf you can do the following
-pdf("Figurename.pdf") ## give the pdf a name. Remember the extension
+pdf("Figurename.pdf") ## give the pdf a name. Remember the extension. You can write to a bunch of different formats using the same syntax: https://www.statmethods.net/interface/io.html
 
 hist(Dian.data1$StartQuery, breaks=20) ## all the code for the figure. This is just some simple code, but often these can have a lot more lines of code. 
 
