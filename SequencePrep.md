@@ -216,3 +216,43 @@ Gorilla.41650fastadata <- newGorilla[,c("Individual", "Seqname", "fasta")]
 
 write.table(Gorilla.41650fastadata, file="Gorilla.41650fasta.txt", quote=F, sep=" ")
 ```
+
+
+Choose loci to investigate: Choose bins and make alignments
+```
+##In R
+
+plot(newGorilla$StartQuery)
+hist(newGorilla$StartQuery)
+hist(newGorilla$StartQuery, breaks=60) ## plot the frequency of the start sits in bins of 50bp
+startfreq.Gorilla <- hist(newGorilla$StartQuery, breaks=60)  ##write the data for the hist graph to a variable so that we can inspect the results
+
+head(startfreq.Gorilla)  #what does this look like? What are the columns?
+
+sort(startfreq.Gorilla$counts)  # this gives the counts for each bin
+startfreq.Gorilla$mids  ## this is the midpoint of each bin
+
+plot(startfreq.Gorilla$counts~startfreq.Gorilla$mids) ## now we can look at the frequency again. Where is the highest frequency? 
+
+colnames(newGorilla)
+Gorilla.bin1750 <- newGorilla[which(newGorilla$StartQuery > 1750),]    ## select sequences in a given range
+Gorilla.bin1750 <- Gorilla.bin1750[which(Gorilla.bin1750$StartQuery <1800),]
+
+dim(Gorilla.bin1750) ## how many sequences do we have? 
+
+summary(Gorilla.bin1750$Individual)  # What is the distribution of sequences per individual?
+hist(Gorilla.bin1750$Individual)
+
+newGorilla$IndivCombined <- newGorilla$Individual  ##We probably want to combine the data from multiple runs per individual
+newGorilla$Individual
+newGorilla$IndivCombined <- gsub('[0-9]+', '', newGorilla$IndivCombined)  #So the code up to here adds a new column to the dataframe, and then removes the numbers. So that’ll leave us with only the individual name without the run number
+#str(Gorilla.bin1750$Individual)  #check what the structure of this column is, because it plots without error
+Gorilla.bin1750$IndivCombined <- as.factor(Gorilla.bin1750$IndivCombined)  ## i.s.o string. factor is needed for plot function
+summary(newGorilla$IndivCombined)  ## now we can get a better idea of the frequency of sequences per individual
+plot(Gorilla.bin1750$IndivCombined)  # and visualise this
+
+write.table(Gorilla.bin1750[,c("subjectID", "fasta")], file="Gorilla.bin1750.fasta.txt", sep=" ", quote=F, row.names=F)  
+
+
+
+```
