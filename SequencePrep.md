@@ -88,6 +88,14 @@ cp DianSRX243537.txt test.txt  ## I'm copying the file just in case something go
 sed -i '.bak' 's/HWI-ST700660.*/ /g' test.txt   ## I'm using the sed function to replace a string of text. sed = stream editor. -i means inline editing. '.bak' is an exension sed adds to the edited file. substitute/text to replace/ new text/ globally file.name. To match a string after some text (in this case HWI... ) add the '.*'
 
 
+     ## And for the full dataset
+
+cat *SRX*txt > Gorilla27fasta
+
+sed -i '.bak' 's/HWI-ST.*//g' Gorilla27fasta   ## replaces the string in the header. 
+
+diff Gorilla27fasta rawallfasta.txt ##Check that Becky and I got the same files
+
 ## in Powershell for Windows
 
 cat *SRX*txt | sc rawallfasta.txt #combine all fasta documents
