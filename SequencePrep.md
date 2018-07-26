@@ -246,6 +246,10 @@ hist(Gorilla.bin1750$Individual)
 newGorilla$IndivCombined <- newGorilla$Individual  ##We probably want to combine the data from multiple runs per individual
 newGorilla$Individual
 newGorilla$IndivCombined <- gsub('[0-9]+', '', newGorilla$IndivCombined)  #So the code up to here adds a new column to the dataframe, and then removes the numbers. So that’ll leave us with only the individual name without the run number
+newGorilla$IndivCombined <- gsub('KatieKB', 'Katie', newGorilla$IndivCombined)
+newGorilla$IndivCombined <- gsub('KatieB', 'Katie', newGorilla$IndivCombined)
+newGorilla$IndivCombined <- gsub('Azizi ', 'Azizi', newGorilla$IndivCombined)
+
 #str(Gorilla.bin1750$Individual)  #check what the structure of this column is, because it plots without error
 Gorilla.bin1750$IndivCombined <- as.factor(Gorilla.bin1750$IndivCombined)  ## i.s.o string. factor is needed for plot function
 summary(newGorilla$IndivCombined)  ## now we can get a better idea of the frequency of sequences per individual
