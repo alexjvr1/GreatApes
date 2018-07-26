@@ -130,7 +130,28 @@ Get-Content allnames.txt | Group-Object | Where-Object { $_.Count -gt 1 } | Sele
 gc fastashortname.txt | Measure-Object #count how many lines in file
 
 ```
+We had to remove Dolly because her HIT table is incomplete. And we find 2 duplicates - i.e. a single fasta sequence, but 2 HIT records. This was found in Helen & Kolo..66. We deleted these records entirely from the fasta raw and combined data, and from the combined csv file. Note that the records are still in the raw csv HIT files!
 
+```
+SRR748172.111159374.2 (Helen)
+
+SRR747998.87009775.2 (Kolo SRX243466)
+```
+
+
+create a file with all fasta names & a file with all sequences
+```
+linux 
+/Users/alexjvr/Dropbox/Individual\ Seq
+
+grep ">" Gorilla26.fasta > Gorilla26.fastanames  # first write all the names to a file
+
+cat Gorilla26.fasta | xargs -n 3 | awk '{print $2$3}' > Gorilla26.singleline.fasta ## NCBI has printed all the fasta sequences onto 2 lines per sequence. We want a single line. 
+
+
+cat Gorilla26.fasta | xargs -n 3 | awk '{print $2$3}' > Gorilla26.singleline.fasta
+
+```
 
 
 
