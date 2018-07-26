@@ -168,13 +168,26 @@ cat Gorilla26.singleline.fasta.txt | wc -l
 
 ```
 
-Read files into R : fasta, names and csv 
+Read files into R : fasta, names and csv. Use delim for text files.
+````
+Gorillacsv<-read.csv("Gorilla26.csv")
+Gorillafasta<-read.delim("Gorilla26.singleline.fasta.txt", header=F)
+Gorillanames<-read.delim("Gorilla26.fastanames.txt", header=F)
 
-```
+````
+Add columns to the csv file for the names and the fasta
+
+````
 Gorillacsv$Seqname<-Gorillanames$V1
 Gorillacsv$Seqname<-Gorillafasta$V
 
+````
+subset data into new table from csv, anything above 90 in alignment length. Comma at end notes copy all columns.
+Dim can be used to check dimensions of file to
+````
+newGorilla<-subset(Gorillacsv, alignmentLength > 90,)
+dim(Gorillacsv)
+dim(newGorilla)
+
 ```
-use the above to add columns to the csv file for the names and the fasta
-
-
+ 
