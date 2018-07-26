@@ -90,12 +90,12 @@ sed -i '.bak' 's/HWI-ST700660.*/ /g' test.txt   ## I'm using the sed function to
 
 ## in Powershell for Windows
 
-cat *SRX*txt | sc allfasta.txt #combine all fasta documents
+cat *SRX*txt | sc rawallfasta.txt #combine all fasta documents
 
 Copy-Item Abefasta.txt Abefasta.backup.txt  ## change the file names as you see fit
 
 > (Get-Content Abe.backup.txt) | ForEach-Object {$_ -replace "HWI-ST[0-9,_,:]*",""} | set-content newfile.txt #test code
- (Get-Content allfasta.txt) | ForEach-Object {$_ -replace"HWI-ST[0-9,_,:]*",""} | set-content newfasta.txt
+ (Get-Content allfasta.txt) | ForEach-Object {$_ -replace"HWI-ST[0-9,_,:]*",""} | set-content fastashortname.txt
 ```
 
 Then we want to create a file with a list of names for all the sequences, and make sure that they're unique. We'll add this to the file in R, so that you can sort and delete the files as necessary. 
@@ -111,7 +111,7 @@ uniq -d abenames.txt  ## check that all the lines are unique. -d option prints a
 
 ## Windows PowerShell
 
-sls ">" newfasta.txt -ca | select -exp line > allnames.txt  ##sls = select string
+sls ">" fastashortname.txt -ca | select -exp line > allnames.txt  ##sls = select string
 
 ##check that this is correct
 
