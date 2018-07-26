@@ -154,4 +154,16 @@ cat Gorilla26.fasta | xargs -n 3 | awk '{print $2$3}' > Gorilla26.singleline.fas
 ```
 
 
+Final number of sequences
+```
+grep "SRA" Gorilla26.csv |wc -l
 
+> 54262
+
+cat Gorilla26.fastanames | wc -l
+> 54262
+
+cat Gorilla26.singleline.fasta.txt | wc -l
+> 54262
+
+```
