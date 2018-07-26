@@ -189,5 +189,5 @@ newGorilla<-subset(Gorillacsv, alignmentLength > 90,)
 dim(Gorillacsv)
 dim(newGorilla)
 
-```
+````
  
