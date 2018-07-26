@@ -167,3 +167,14 @@ cat Gorilla26.singleline.fasta.txt | wc -l
 > 54262
 
 ```
+
+Read files into R : fasta, names and csv 
+
+```
+Gorillacsv$Seqname<-Gorillanames$V1
+Gorillacsv$Seqname<-Gorillafasta$V
+
+```
+use the above to add columns to the csv file for the names and the fasta
+
+
