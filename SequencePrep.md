@@ -119,7 +119,7 @@ gc allnames.txt | select -first 10 ##Get-Content, alias=gc
 
 Get-Content allnames.txt | Group-Object | Where-Object { $_.Count -gt 1 } | Select -ExpandProperty Name    ## this should write all the duplicated names. Make sure there aren't any!
 
-gc allfasta.txt | Measure-Object #count how many lines in file
+gc fastashortname.txt | Measure-Object #count how many lines in file
 
 ```
 
