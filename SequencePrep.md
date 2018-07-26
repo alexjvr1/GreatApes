@@ -38,6 +38,7 @@ Open R in the folder with all the data. On my computer this is here:
 ```
 R version 3.5.0
 
+
 Dian.data <- read.csv("DianSRX243537.csv", header=T) # import the csv file into R. I've added a row with headers at the top of this HIT file. If this isn't there, you can say header=F. 
 
 ## let's first look at what the data looks like. For some of the sequences only a short fragment matched the query sequence
@@ -260,3 +261,61 @@ write.table(Gorilla.bin1750[,c("subjectID", "fasta")], file="Gorilla.bin1750.fas
 
 
 ```
+
+
+Final Code to select bin at 1500bp
+```
+plot(newGorilla$StartQuery)
+hist(newGorilla$StartQuery)
+hist(newGorilla$StartQuery, breaks=300) ## plot the frequency of the start sits in bins of 50bp
+startfreq.Gorilla <- hist(newGorilla$StartQuery, breaks=300)  ##write the data for the hist graph to a variable so that we can inspect the results
+
+head(startfreq.Gorilla)  #what does this look like? What are the columns?
+
+sort(startfreq.Gorilla$counts)  # this gives the counts for each bin, sorted by size
+subset()
+startfreq.Gorilla$mids  ## this is the midpoint of each bin. Use this info to find where the bin of interest starts
+
+
+newGorilla$IndivCombined <- newGorilla$Individual  ##We probably want to combine the data from multiple runs per individual
+newGorilla$Individual
+newGorilla$IndivCombined <- gsub('[0-9]+', '', newGorilla$IndivCombined)  #So the code up to here adds a new column to the dataframe, and then removes the numbers. So that’ll leave us with only the individual name without the run number
+newGorilla$IndivCombined <- gsub('KatieKB', 'Katie', newGorilla$IndivCombined)
+newGorilla$IndivCombined <- gsub('KatieB', 'Katie', newGorilla$IndivCombined)
+newGorilla$IndivCombined <- gsub('Azizi ', 'Azizi', newGorilla$IndivCombined)
+#str(Gorilla.bin1750$Individual)  #check what the structure of this column is, because it plots without error
+newGorilla$IndivCombined <- as.factor(newGorilla$IndivCombined)
+summary(newGorilla$IndivCombined)
+
+colnames(newGorilla)
+Gorilla.bin1500 <- newGorilla[which(newGorilla$StartQuery > 1500),]    ## select sequences in a given range
+Gorilla.bin1500 <- Gorilla.bin1500[which(Gorilla.bin1500$StartQuery <1510),]
+
+dim(Gorilla.bin1500) ## how many sequences do we have? 
+
+summary(Gorilla.bin1500$Individual)  # What is the distribution of sequences per individual?
+
+
+#Gorilla.bin1500$IndivCombined <- as.factor(Gorilla.bin1500$IndivCombined)  ## i.s.o string. factor is needed for plot function
+summary(newGorilla$IndivCombined)  ## now we can get a better idea of the frequency of sequences per individual
+plot(Gorilla.bin1500$IndivCombined)  # and visualise this
+
+write.table(Gorilla.bin1500[,c("subjectID", "fasta")], file="Gorilla.bin1500.fasta.txt", sep=" ", quote=F, row.names=F)  
+```
+
+Edit the files in linux to be correct fasta files
+```
+sed -i '.bak' 's/SRA:/>/g' Gorilla.bin1500.fasta.txt 
+sed -E -e 's/[[:blank:]]+/\'$'\n/g' Gorilla.bin1500.fasta.txt > Gorilla.bin1500.fasta2.txt
+open Gorilla.bin1500.fasta2.txt ## check that the format is correct
+mv Gorilla.bin1500.fasta2.txt Gorilla.bin1500.fasta.txt
+
+
+sed -i '.bak' 's/SRA:/>/g' Gorilla.bin2240.fasta.txt 
+sed -E -e 's/[[:blank:]]+/\'$'\n/g' Gorilla.bin2240.fasta.txt > Gorilla.bin2240.fasta2.txt
+open Gorilla.bin2240.fasta2.txt ## check that the format is correct
+mv Gorilla.bin2240.fasta2.txt Gorilla.bin2240.fasta.txt
+```
+
+
+
