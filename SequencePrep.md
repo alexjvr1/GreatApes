@@ -316,6 +316,16 @@ sed -E -e 's/[[:blank:]]+/\'$'\n/g' Gorilla.bin2240.fasta.txt > Gorilla.bin2240.
 open Gorilla.bin2240.fasta2.txt ## check that the format is correct
 mv Gorilla.bin2240.fasta2.txt Gorilla.bin2240.fasta.txt
 ```
+Using R to create phylogentic tree for all gogo data and bin2240 data. Sequence names have been shortened.
 
+````
+GoGo.ShortName<-read.dna("AllGoGo.bin2240.100bp.SN.txt", format="fasta") #importing sequence in fasta format
+GoGo.ShortName_phyDat<-phyDat(GoGo.ShortName, type="DNA", levels=NULL) #convert alignment to phyDat object to use in phangorn package
+dna_di<-dist.ml(GoGo.ShortName_phyDat, model="JC69") #producing distance matrix
+GoGo.ShortName_UPGMA<-upgma(dna_di) 
+GoGo.ShortName_NJ<-NJ(dna_di)
+plot(GoGo.ShortName_UPGMA, main="UPMGA") #different algorithms to build from dm
+plot(GoGo.ShortName_NJ,main="Neighbor Joining") #different algorithm
+plot(GoGo.ShortName_NJ, "unrooted", main="NJ") #plotting an unrooted neighbour joining tree 
 
-
+````
