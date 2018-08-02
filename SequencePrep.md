@@ -351,11 +351,12 @@ logLik(fitJC)
 bs <- bootstrap.pml(fitJC, bs=100, optNni=TRUE, multicore=F, control = pml.control(trace=0)) #computer only has one core so multicore is false
 plotBS(midpoint(fitJC$tree), bs, p = 50, type="p")
 
-###
-fit2240<-pml(HLA.GoGo.SRA_NJ, HLA.GoGo.SRA_phyDat)
-print(fit2240)
-fit2240JC<-optim.pml(fit2240, model = "JC", rearrangement = "stochastic")
-logLik(fit2240JC)
-bs <- bootstrap.pml(fit2240JC, bs=100, optNni=TRUE, multicore=F, control = pml.control(trace=0)) #computer only has one core so multicore is false
-plotBS(midpoint(fit2240JC$tree), bs, p = 50, type="p")
+````
+
+Then run analyses
+
+````
+SRA.1500.A<-read.FASTA("Bin1500.cluster.SRA.A.txt")
+nuc.div(SRA.1500.A)
+hap.div(SRA.1500.A)
 ````
