@@ -316,16 +316,46 @@ sed -E -e 's/[[:blank:]]+/\'$'\n/g' Gorilla.bin2240.fasta.txt > Gorilla.bin2240.
 open Gorilla.bin2240.fasta2.txt ## check that the format is correct
 mv Gorilla.bin2240.fasta2.txt Gorilla.bin2240.fasta.txt
 ```
-Using R to create phylogentic tree for all gogo data and bin2240 data. Sequence names have been shortened.
+Using R to create phylogentic tree for all gogo data and bin2240 data. Also for bin1500 Sequence names have been shortened.
 
 ````
-GoGo.ShortName<-read.dna("AllGoGo.bin2240.100bp.SN.txt", format="fasta") #importing sequence in fasta format
-GoGo.ShortName_phyDat<-phyDat(GoGo.ShortName, type="DNA", levels=NULL) #convert alignment to phyDat object to use in phangorn package
-dna_di<-dist.ml(GoGo.ShortName_phyDat, model="JC69") #producing distance matrix
-GoGo.ShortName_UPGMA<-upgma(dna_di) 
-GoGo.ShortName_NJ<-NJ(dna_di)
-plot(GoGo.ShortName_UPGMA, main="UPMGA") #different algorithms to build from dm
-plot(GoGo.ShortName_NJ,main="Neighbor Joining") #different algorithm
-plot(GoGo.ShortName_NJ, "unrooted", main="NJ") #plotting an unrooted neighbour joining tree 
+HLA.GoGo.SRA<-read.dna("Sorted.HLA.GoGo.SRA.aln.100bp.fas.SN.txt", format="fasta") #importing sequence in fasta format
+HLA.GoGo.SRA_phyDat<-phyDat(HLA.GoGo.SRA, type="DNA", levels=NULL) #convert alignment to phyDat object to use in phangorn package
+dm<-dist.ml(HLA.GoGo.SRA_phyDat, model="JC69") #producing distance matrix
+HLA.GoGo.SRA_UPGMA<-upgma(dm)
+HLA.GoGo.SRA_NJ<-NJ(dm)
+plot(HLA.GoGo.SRA_UPGMA, main="UPMGA") #different algorithms to build from dm
+plot(HLA.GoGo.SRA_NJ,main="Neighbor Joining") #different algorithm
+plot(HLA.GoGo.SRA_NJ, "unrooted", main="NJ", cex.main=0.8)
+str(HLA.GoGo.SRA_NJ)
 
+
+####
+HLA.GoGo.SRA1500<-read.dna("Sorted.HLA.GoGo.SRA1500.90bp.txt", format="fasta") #importing sequence in fasta format
+HLA.GoGo.SRA1500_phyDat<-phyDat(HLA.GoGo.SRA1500, type="DNA", levels=NULL) #convert alignment to phyDat object to use in phangorn package
+d.m<-dist.ml(HLA.GoGo.SRA1500_phyDat, model="JC69") #producing distance matrix
+HLA.GoGo.SRA1500_UPGMA<-upgma(d.m)
+HLA.GoGo.SRA1500_NJ<-NJ(d.m)
+plot(HLA.GoGo.SRA1500_UPGMA, main="UPMGA") #different algorithms to build from dm
+plot(HLA.GoGo.SRA1500_NJ,main="Neighbor Joining") #different algorithm
+plot(HLA.GoGo.SRA1500_NJ, "unrooted", main="NJ", cex.main=0.8)
+
+````
+Bootstrap these
+
+````
+fit<-pml(HLA.GoGo.SRA1500_NJ, HLA.GoGo.SRA1500_phyDat)
+print(fit)
+fitJC<-optim.pml(fit, model = "JC", rearrangement = "stochastic")
+logLik(fitJC)
+bs <- bootstrap.pml(fitJC, bs=100, optNni=TRUE, multicore=F, control = pml.control(trace=0)) #computer only has one core so multicore is false
+plotBS(midpoint(fitJC$tree), bs, p = 50, type="p")
+
+###
+fit2240<-pml(HLA.GoGo.SRA_NJ, HLA.GoGo.SRA_phyDat)
+print(fit2240)
+fit2240JC<-optim.pml(fit2240, model = "JC", rearrangement = "stochastic")
+logLik(fit2240JC)
+bs <- bootstrap.pml(fit2240JC, bs=100, optNni=TRUE, multicore=F, control = pml.control(trace=0)) #computer only has one core so multicore is false
+plotBS(midpoint(fit2240JC$tree), bs, p = 50, type="p")
 ````
