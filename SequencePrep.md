@@ -356,7 +356,7 @@ plotBS(midpoint(fitJC$tree), bs, p = 50, type="p")
 Then run analyses
 
 ````
-###
+
 SRA.1500.A<-read.FASTA("Bin1500.cluster.SRA.A.txt")
 nuc.div(SRA.1500.A)
 hap.div(SRA.1500.A)
@@ -370,7 +370,7 @@ GoGoHLA.1500.B<-read.FASTA("Bin1500.cluster.HLAGoGoB.txt")
 nuc.div(GoGoHLA.1500.B)
 hap.div(GoGoHLA.1500.B)
 
-###
+
 
 SRA.2240.A<-read.FASTA("Bin2240.cluster.SRA.A.txt")
 nuc.div(SRA.2240.A)
