@@ -13,4 +13,8 @@ KY613128.1
 KY613075.1
 as query accessions (Papa-A, -B and -C)
 
+Blast version: blastn
+
+Downloaded all hits in fasta format, and HIT table for information on start and end position of match with query sequence.
+
 
