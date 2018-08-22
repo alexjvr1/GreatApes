@@ -23,5 +23,19 @@ Downloaded all hits in fasta format, and HIT table for information on start and 
 ```
 #Upload to server
 scp *filename/file path* alexjvr@fgcz-c-047.uzh.ch:/srv/kenlab/alexjvr_p1795/GreatApes
+```
+In R (examples only as I did this for each hit table separately)
+```
+dze241291.ht <- read.table("dze241291_hittable.txt", header=F) #read in the table
+dze241291.ht$INDV <- "Dzeeta" #add a column with the individual name
+
+#After reading all the tables in, I merged them first by individual to make sure I got all of them
+dzemerged <- rbind(dze241290.ht, dze241291.ht)
+
+#Then merge them all
+hittables.merged <- rbind(bonmerged, catmerged, chimerged, desmerged, dzemerged, hermerged, hormerged, kommerged, kosmerged, kummerged, lbmerged, natmerged, salmerged)
+
+#And draw a histogram of the alignments lengths (located in the column aptly-named V4)
+hist(hittables.merged$V4, xlab = "Alignment length", main = NULL, breaks = 50, col = "purple", ylim=c(0, 20000))
 
 
