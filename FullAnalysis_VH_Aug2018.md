@@ -70,3 +70,4 @@ alexjvr@fgcz-c-047:/srv/kenlab/alexjvr_p1795/GreatApes
 
 fastq-dump --split-files SRR747648
 ```
+
