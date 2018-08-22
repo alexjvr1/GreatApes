@@ -16,9 +16,9 @@ https://www.ncbi.nlm.nih.gov/nuccore/KY613075.1
 https://www.ncbi.nlm.nih.gov/nuccore/KY613128.1
 https://www.ncbi.nlm.nih.gov/nuccore/KY613168.1
 
-Blast version: blastn, set max target sequences to 5000
+Blast version: megablast, set max target sequences to 5000. All other settings at defaults.
 
-Downloaded all hits in fasta format, and HIT table for information on start and end position of match with query sequence (from the top of the page!).
+Downloaded all hits in fasta format, and HIT table for information on start and end position of match with query sequence (from the top of the page!). HIT table only needs to be downloaded once per blast (has all 3 queries in).
 
 ```
 #Upload to server
