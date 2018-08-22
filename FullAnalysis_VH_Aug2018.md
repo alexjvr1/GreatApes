@@ -20,4 +20,7 @@ Blast version: blastn, set max target sequences to 5000
 
 Downloaded all hits in fasta format, and HIT table for information on start and end position of match with query sequence (from the top of the page!).
 
+#Upload to server
+scp *filename/file path* alexjvr@fgcz-c-047.uzh.ch:/srv/kenlab/alexjvr_p1795/GreatApes
+
 
