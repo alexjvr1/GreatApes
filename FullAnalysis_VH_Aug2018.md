@@ -52,3 +52,13 @@ V10 = S end
 V11 = E value
 V12 = Bit score
 
+
+
+# SRA-toolkit
+
+We re-evaluated our methods. It might be better to use an optimised algorithm like bwa-mem to map all the SRA reads to the reference sequences and then call variants on these. Based on the BLAST results we have a distribution of the start site frequency of all the SRA reads as mapped to each one of the reference sequences. We expect that the regions of higher depth would be conserved between genes, and so sequences from all three loci are found with BLAST. 
+
+
+
+
+Using SRA-toolkit to extract all the data from NCBI into paired end fastq format. 
