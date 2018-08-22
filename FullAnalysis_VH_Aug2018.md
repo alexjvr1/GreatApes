@@ -52,6 +52,7 @@ V10 = S end
 V11 = E value
 V12 = Bit score
 
+NCBI insert size: 205 
 
 
 # SRA-toolkit
