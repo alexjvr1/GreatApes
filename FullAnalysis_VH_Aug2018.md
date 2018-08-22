@@ -8,7 +8,7 @@ https://link.springer.com/article/10.1007%2Fs00251-017-0990-x#Sec2
 All individuals can be found at https://www.ncbi.nlm.nih.gov/sra (filter for P.paniscus)
 
 Used 
-KY613168.1
+KY613168.1 
 KY613128.1
 KY613075.1
 as query accessions (Papa-A, -B and -C)
