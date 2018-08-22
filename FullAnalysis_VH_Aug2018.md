@@ -37,5 +37,18 @@ hittables.merged <- rbind(bonmerged, catmerged, chimerged, desmerged, dzemerged,
 
 #And draw a histogram of the alignments lengths (located in the column aptly-named V4)
 hist(hittables.merged$V4, xlab = "Alignment length", main = NULL, breaks = 50, col = "purple", ylim=c(0, 20000))
-
+```
+#Column name key
+V1 = Query acc. version
+V2 = Subject acc. version
+V3 = % identity
+V4 = Alignment length
+V5 = Mismatches
+V6 = Gap opens
+V7 = Q start
+V8 = Q end
+V9 = S start
+V10 = S end
+V11 = E value
+V12 = Bit score
 
