@@ -2,7 +2,7 @@
 
 Vilhelmiina Haavisto will continue with this project, and extract data for all the sequenced Great Apes. 
 
-##BLAST for bonobos (Pan paniscus)
+## BLAST for bonobos (Pan paniscus)
 https://link.springer.com/article/10.1007%2Fs00251-017-0990-x#Sec2
 
 All individuals can be found at https://www.ncbi.nlm.nih.gov/sra (filter for P.paniscus)
@@ -38,7 +38,7 @@ hittables.merged <- rbind(bonmerged, catmerged, chimerged, desmerged, dzemerged,
 #And draw a histogram of the alignments lengths (located in the column aptly-named V4)
 hist(hittables.merged$V4, xlab = "Alignment length", main = NULL, breaks = 50, col = "purple", ylim=c(0, 20000))
 ```
-#Column name key
+# Column name key
 V1 = Query acc. version
 V2 = Subject acc. version
 V3 = % identity
