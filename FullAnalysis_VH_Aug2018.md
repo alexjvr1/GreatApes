@@ -59,7 +59,14 @@ NCBI insert size: 205
 
 We re-evaluated our methods. It might be better to use an optimised algorithm like bwa-mem to map all the SRA reads to the reference sequences and then call variants on these. Based on the BLAST results we have a distribution of the start site frequency of all the SRA reads as mapped to each one of the reference sequences. We expect that the regions of higher depth would be conserved between genes, and so sequences from all three loci are found with BLAST. 
 
+So we've decided to use BWA mem to map the reads to a linked sequence of all three MHC genes + a reference gene (in this case [Interleuken 6](https://www.ncbi.nlm.nih.gov/nuccore/NC_000007.14?report=genbank&from=22725889&to=22732002)). 
 
+First we'll download the data directly as paired end fastq data from NCBI using SRA-toolkit. 
 
+This was downloaded directly in the working directory on fgcz47 server: 
 
-Using SRA-toolkit to extract all the data from NCBI into paired end fastq format. 
+```
+alexjvr@fgcz-c-047:/srv/kenlab/alexjvr_p1795/GreatApes
+
+fastq-dump --split-files SRR747648
+```
