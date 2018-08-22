@@ -12,9 +12,12 @@ KY613168.1
 KY613128.1
 KY613075.1
 as query accessions (Papa-A, -B and -C)
+https://www.ncbi.nlm.nih.gov/nuccore/KY613075.1
+https://www.ncbi.nlm.nih.gov/nuccore/KY613128.1
+https://www.ncbi.nlm.nih.gov/nuccore/KY613168.1
 
-Blast version: blastn
+Blast version: blastn, set max target sequences to 5000
 
-Downloaded all hits in fasta format, and HIT table for information on start and end position of match with query sequence.
+Downloaded all hits in fasta format, and HIT table for information on start and end position of match with query sequence (from the top of the page!).
 
 
