@@ -71,3 +71,12 @@ alexjvr@fgcz-c-047:/srv/kenlab/alexjvr_p1795/GreatApes
 fastq-dump --split-files SRR747648
 ```
 
+## Mapping to our file containing MHC-A, -B, -C consensus sequences as well as IL6 sequence
+
+```
+/usr/local/ngseq/packages/Aligner/BWA/0.7.15/bin/bwa mem -t 10 /srv/kenlab/alexjvr_p1795/GreatApes/Mapping/MHCrefseq.fasta /srv/kenlab/alexjvr_p1795/GreatApes/SRR748147_1.fastq /srv/kenlab/alexjvr_p1795/GreatApes/SRR748147_2.fastq > aln-pe.SRR748147.sam
+
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools import /srv/kenlab/alexjvr_p1795/GreatApes/Mapping/MHCrefseq.fasta aln-pe.SRR748147.sam aln-pe.SRR748147.bam
+
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools sort aln-pe.SRR747648.bam -o SRR747648.bam.sorted
+
