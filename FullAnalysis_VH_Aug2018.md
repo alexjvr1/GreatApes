@@ -78,5 +78,7 @@ fastq-dump --split-files SRR747648
 
 /usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools import /srv/kenlab/alexjvr_p1795/GreatApes/Mapping/MHCrefseq.fasta aln-pe.SRR748147.sam aln-pe.SRR748147.bam
 
-/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools sort aln-pe.SRR747648.bam -o SRR747648.bam.sorted
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools sort aln-pe.SRR748147.bam -o SRR748147.bam.sorted
+
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools flagstat SRR748147.bam.sorted
 
