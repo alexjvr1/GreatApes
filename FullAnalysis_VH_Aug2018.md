@@ -130,9 +130,30 @@ java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar\
 #Joint genotyping
 java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar \ -T GenotypeGVCFs \ -R MHCrefseqNoGaps.fasta \ --variant cohort.g.vcf \ -o cohort.output.vcf
 ```
-Some questions...
-1) How does this final step call the variants? What are the default filters that resulted in the loss of so many loci?
+## Some questions...
 
-2) How are these loci distributed across our 4 reference genes? (both in terms of how many loci mapped to each gene and whether we have a representation of the whole gene in each case)
-3) How was the mapping (bwa) affected by the removal of the insert (when we removed the -'s)? Can you compare how many loci we get when mapping to each of the references?  And I think we need a literature/forum search to work out what the best option is for mapping loci when we expect there to be inserts. 
+**1.	How does this final step call the variants? What are the default filters that resulted in the loss of so many loci?
+Read Filters automatically applied to the data in GenotypeGVCFs processing (italics indicate those which are most likely influencing our dataset)**
+MalformedReadFilter: Filters out ‘malformed’ reads, including those with invalid alignment starts/ends, disagreeing headers, missing read groups, or empty/not supported CIGAR strings - seems to have most criteria so maybe this is what is doing the majority of the filtering?
+BadCigarFilter: filters out reads where the CIGAR strings do not match up, where there are clips, or where there are consecutive indels in the cigar (does our dataset have these?? I couldn’t find them, but maybe I’m not looking in the right place…)
+UnmappedReadFilter: filters out reads that are SAM flagged as unmapped – we already did this in an earlier step so I don’t think this filter is having much of an effect
+NotPrimaryAlignmentFilter: recognized SAM flag identifying secondary alignment (flag 256), so that records used for analysis are likely to be mapped in the right place and therefore relevant. Does not filter out supplementary alignments (flag 2048)
+FailsVendorQualityCheckFilter: filters out sam flag 512, which is reads that fail the vendor quality check
+DuplicateReadFilter: filters out duplicate reads
+
+**2.	How are these loci distributed across our 4 reference genes? (both in terms of how many loci mapped to each gene and whether we have a representation of the whole gene in each case)**
+27 loci mapped to IL6, 94 to MHC-A, 1 to MHC-B, 32 to MHC-C (-1 from grep output as they also appear in the header of the file, add up to 154 which was our number of sites)
+grep -o 'IL6' cohort.output.vcf | wc -l
+ 
+**3.	How was the mapping (bwa) affected by the removal of the insert (when we removed the -'s)? Can you compare how many loci we get when mapping to each of the references?**
+```
+samtools flagstat SRR748147.rg.sorted.mo.ng.bam
+samtools flagstat SRR748147.sorted.rg.mappedonly.bam
+```
+SRR748147.rg.sorted.mo.ng.bam (mapped to no gaps reference) returns 141724 reads, second (maps to gapped reference) returns 69464 reads
+
+
+**3 cont) And I think we need a literature/forum search to work out what the best option is for mapping loci when we expect there to be inserts.**
+
+ 
 
