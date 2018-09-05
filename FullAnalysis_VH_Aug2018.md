@@ -86,6 +86,8 @@ fastq-dump --split-files SRR747648
 ## 05.09.2018
 
 ```
+alexjvr@fgcz-c-047:/srv/kenlab/alexjvr_p1795/GreatApes$
+
 #Realigning files with new NoGaps MHCrefseq file
 /usr/local/ngseq/packages/Aligner/BWA/0.7.15/bin/bwa mem -t 10 /srv/kenlab/alexjvr_p1795/GreatApes/Mapping/MHCrefseqNoGaps.fasta /srv/kenlab/alexjvr_p1795/GreatApes/SRR748147_1.fastq /srv/kenlab/alexjvr_p1795/GreatApes/SRR748147_2.fastq > aln-pe.SRR748147.ng.sam
 
