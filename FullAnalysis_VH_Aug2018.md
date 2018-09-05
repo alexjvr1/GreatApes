@@ -118,3 +118,21 @@ samtools faidx MHCrefseqNoGaps.fasta
 
 #SNP Calling
 java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar -R MHCrefseqNoGaps.fasta -T HaplotypeCaller -I SRR748147.rg.sorted.mo.ng.bam --emitRefConfidence GVCF -o SRR748147.g.vcf
+
+#Data aggregation step - combining the gvcf files from the previous SNP calling step
+java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar\
+   -T CombineGVCFs \
+   -R MHCrefseqNoGaps.fasta \
+   --variant SRR747648.g.vcf \
+   --variant SRR748147.g.vcf \
+   -o cohort.g.vcf
+
+#Joint genotyping
+java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar\ -T GenotypeGVCFs \ -R MHCrefseqNoGaps.fasta \ --variant cohort.g.vcf \ -o cohort.output.vcf
+```
+Some questions...
+1) How does this final step call the variants? What are the default filters that resulted in the loss of so many loci?
+
+2) How are these loci distributed across our 4 reference genes? (both in terms of how many loci mapped to each gene and whether we have a representation of the whole gene in each case)
+3) How was the mapping (bwa) affected by the removal of the insert (when we removed the -'s)? Can you compare how many loci we get when mapping to each of the references?  And I think we need a literature/forum search to work out what the best option is for mapping loci when we expect there to be inserts. 
+
