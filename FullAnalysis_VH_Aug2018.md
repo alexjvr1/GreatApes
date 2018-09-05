@@ -94,7 +94,7 @@ alexjvr@fgcz-c-047:/srv/kenlab/alexjvr_p1795/GreatApes$
 /usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools import /srv/kenlab/alexjvr_p1795/GreatApes/MHCrefseqNoGaps.fasta.fai aln-pe.SRR748147.ng.sam aln-pe.SRR748147.ng.bam
 
 #Removing unmapped reads from .bam file (cuts down on size and comp. time)
-/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools view -b -F 2 aln-pe.SRR748147.ng.bam > SRR748147.mo.ng.bam
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools view -b -f 2 aln-pe.SRR748147.ng.bam > SRR748147.mo.ng.bam
 
 #Sorting the mapped reads-only .bam file
 samtools sort SRR748147.mo.ng.bam -o SRR748147.sorted.mo.ng.bam
