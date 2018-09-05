@@ -128,7 +128,7 @@ java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar\
    -o cohort.g.vcf
 
 #Joint genotyping
-java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar\ -T GenotypeGVCFs \ -R MHCrefseqNoGaps.fasta \ --variant cohort.g.vcf \ -o cohort.output.vcf
+java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar \ -T GenotypeGVCFs \ -R MHCrefseqNoGaps.fasta \ --variant cohort.g.vcf \ -o cohort.output.vcf
 ```
 Some questions...
 1) How does this final step call the variants? What are the default filters that resulted in the loss of so many loci?
