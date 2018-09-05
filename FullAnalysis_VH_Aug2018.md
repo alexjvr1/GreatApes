@@ -117,4 +117,4 @@ java -jar /usr/local/ngseq/packages/Tools/Picard/2.18.0/picard.jar CreateSequenc
 samtools faidx MHCrefseqNoGaps.fasta
 
 #SNP Calling
-java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar -R MHCrefseq.fasta -T HaplotypeCaller -I SRR748147.rg.sorted.mo.ng.bam --emitRefConfidence GVCF -o SRR748147.g.vcf
+java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar -R MHCrefseqNoGaps.fasta -T HaplotypeCaller -I SRR748147.rg.sorted.mo.ng.bam --emitRefConfidence GVCF -o SRR748147.g.vcf
