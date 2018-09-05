@@ -86,14 +86,22 @@ fastq-dump --split-files SRR747648
 ## 05.09.2018
 
 ```
+#Realigning files with new NoGaps MHCrefseq file
+/usr/local/ngseq/packages/Aligner/BWA/0.7.15/bin/bwa mem -t 10 /srv/kenlab/alexjvr_p1795/GreatApes/Mapping/MHCrefseqNoGaps.fasta /srv/kenlab/alexjvr_p1795/GreatApes/SRR748147_1.fastq /srv/kenlab/alexjvr_p1795/GreatApes/SRR748147_2.fastq > aln-pe.SRR748147.ng.sam
+
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools import /srv/kenlab/alexjvr_p1795/GreatApes/MHCrefseqNoGaps.fasta.fai aln-pe.SRR748147.ng.sam aln-pe.SRR748147.ng.bam
+
 #Removing unmapped reads from .bam file (cuts down on size and comp. time)
-/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools view -b -F 2 aln-pe.SRR748147.bam > SRR748147.mappedonly.bam
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools view -b -F 2 aln-pe.SRR748147.ng.bam > SRR748147.mo.ng.bam
+
+#Sorting the mapped reads-only .bam file
+samtools sort SRR748147.mo.ng.bam -o SRR748147.sorted.mo.ng.bam
 
 #Adding and checking for read groups
 /usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools view -H SRR747648.sorted.bam | grep '^@RG'/
 java -jar /usr/local/ngseq/packages/Tools/Picard/2.18.0/picard.jar AddOrReplaceReadGroups \
-      I=SRR748147.mappedonly.bam \
-      O=SRR748147.rg.mappedonly.bam \
+      I=SRR748147.sorted.mo.ng.bam \
+      O=SRR748147.rg.sorted.mo.ng.bam \
       RGID=1 \
       RGLB=SRR748147 \
       RGPL=illumina \
@@ -102,9 +110,9 @@ java -jar /usr/local/ngseq/packages/Tools/Picard/2.18.0/picard.jar AddOrReplaceR
 
 
 #Creating .dict and index files for GATK
-java -jar /usr/local/ngseq/packages/Tools/Picard/2.18.0/picard.jar CreateSequenceDictionary R= MHCrefseqNs.fasta O= MHCrefseqNs.fasta.dict
-/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools index SRR748147.sorted.rg.mappedonly.bam
-samtools faidx MHCrefseqNs.fasta
+java -jar /usr/local/ngseq/packages/Tools/Picard/2.18.0/picard.jar CreateSequenceDictionary R= MHCrefseqNoGaps.fasta O= MHCrefseqNoGaps.dict
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools index SRR748147.rg.sorted.mo.ng.bam
+samtools faidx MHCrefseqNoGaps.fasta
 
 #SNP Calling
-java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar -R MHCrefseq.fasta -T HaplotypeCaller -I SRR748147.sorted.rg.mappedonly.bam --emitRefConfidence GVCF -o SRR748147.g.vcf
+java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar -R MHCrefseq.fasta -T HaplotypeCaller -I SRR748147.rg.sorted.mo.ng.bam --emitRefConfidence GVCF -o SRR748147.g.vcf
