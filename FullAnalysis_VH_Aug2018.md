@@ -81,4 +81,30 @@ fastq-dump --split-files SRR747648
 /usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools sort aln-pe.SRR748147.bam -o SRR748147.bam.sorted
 
 /usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools flagstat SRR748147.bam.sorted
+```
 
+## 05.09.2018
+
+```
+#Removing unmapped reads from .bam file (cuts down on size and comp. time)
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools view -b -F 2 aln-pe.SRR748147.bam > SRR748147.mappedonly.bam
+
+#Adding and checking for read groups
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools view -H SRR747648.sorted.bam | grep '^@RG'/
+java -jar /usr/local/ngseq/packages/Tools/Picard/2.18.0/picard.jar AddOrReplaceReadGroups \
+      I=SRR748147.mappedonly.bam \
+      O=SRR748147.rg.mappedonly.bam \
+      RGID=1 \
+      RGLB=SRR748147 \
+      RGPL=illumina \
+      RGPU=unit1 \
+      RGSM=SRR748147
+
+
+#Creating .dict and index files for GATK
+java -jar /usr/local/ngseq/packages/Tools/Picard/2.18.0/picard.jar CreateSequenceDictionary R= MHCrefseqNs.fasta O= MHCrefseqNs.fasta.dict
+/usr/local/ngseq/packages/Tools/samtools/1.5/bin/samtools index SRR748147.sorted.rg.mappedonly.bam
+samtools faidx MHCrefseqNs.fasta
+
+#SNP Calling
+java -jar /usr/local/ngseq/packages/Variants/GATK/3.8.1.0/GenomeAnalysisTK.jar -R MHCrefseq.fasta -T HaplotypeCaller -I SRR748147.sorted.rg.mappedonly.bam --emitRefConfidence GVCF -o SRR748147.g.vcf
