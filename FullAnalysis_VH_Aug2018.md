@@ -143,7 +143,7 @@ Read Filters automatically applied to the data in GenotypeGVCFs processing (ital
 
 **2.	How are these loci distributed across our 4 reference genes? (both in terms of how many loci mapped to each gene and whether we have a representation of the whole gene in each case)**
 27 loci mapped to IL6, 94 to MHC-A, 1 to MHC-B, 32 to MHC-C (-1 from grep output as they also appear in the header of the file, add up to 154 which was our number of sites)
-grep -o 'IL6' cohort.output.vcf | wc -l
+``` grep -o 'IL6' cohort.output.vcf | wc -l ```
  
 **3.	How was the mapping (bwa) affected by the removal of the insert (when we removed the -'s)? Can you compare how many loci we get when mapping to each of the references?**
 ```
