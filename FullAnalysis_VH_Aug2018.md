@@ -4,6 +4,7 @@ Vilhelmiina Haavisto will continue with this project, and extract data for all t
 
 Links for downloading multiple SRA files: https://www.biostars.org/p/51354/
 
+https://github.com/ncbi/sra-tools/issues/24
 
 
 
