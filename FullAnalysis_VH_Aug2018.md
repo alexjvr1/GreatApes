@@ -4,6 +4,9 @@ Vilhelmiina Haavisto will continue with this project, and extract data for all t
 
 Links for downloading multiple SRA files: https://www.biostars.org/p/51354/
 
+
+
+
 ## BLAST for bonobos (Pan paniscus)
 https://link.springer.com/article/10.1007%2Fs00251-017-0990-x#Sec2
 
